@@ -1,0 +1,139 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+{% block head %}
+<link rel="stylesheet" type="text/css" href="./styles.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+{% comment %}
+ 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  	<script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  {% endcomment %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!--  <script src="{% static 'js/jquery.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+<!--  <script src="{% static 'js/jquery.min.2.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+
+<title>{{cn.c_short_name}}</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock  %}
+<style>
+  ul.dropdown-menu li a.dropdown-item:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  color:darkgray!important;
+
+}
+.bg-createcolor{
+background: rgba(10,10,43,.75)
+}
+.min-hight{
+Min-height:170vh;
+}
+
+@media(max-width:767px){
+#sidebar{
+margin-left:-1000px;
+position: fixed;
+z-index: 1;
+top:0
+}
+#sidebar.active{
+margin-left: 0;
+}
+}
+</style>
+</head>
+
+
+<body>
+  <div class="container-fluid">
+<div class="row flex-nowrap ">
+  <div class="bg-createcolor col-8 col-md-3  min-hight sidebar"id="sidebar">
+    <div class="flex-wrap">
+        <div class="d-flex justify-content-between align-items-center ">
+            <a href="{% url 'home' %}"class="text-decoration-none  align-items-center  d-none d-md-flex">
+                <img src="https://i.postimg.cc/g0Nc5hFy/logo.png"style="height:50px; width:50px"alt="logo"/><span class="d-none d-md-block fs-4  d-sm-inline text-white">NANOVISION</span>
+            </a>
+            <div class="close-btn d-md-none d-block ms-auto py-3"><i class="fa-solid fa-xmark text-white fs-4"></i></div>
+
+        </div>
+    </div>
+    <ul class="nav nav-pills flex-column mt-4 ">
+        <li class="nav-item dropdown ">
+            <a href=""class="nav-link text-white " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user me-2"></i>Admin</a>
+            <ul class="dropdown-menu bg-createcolor ">
+                <li><a class="dropdown-item text-white" href="{% url 'company_course_entry' %}">Course Entry</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_help_desk_number_entry' %}">Help desk number</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_empolys_user_entry' %}">User entry</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_expence_catagory_entry' %}">Expencse Catagory Entry</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_course_list_view' %}">Course List</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_student_or_user_report' %}">Account List</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_daily_income_history' %}">Daily Income</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_daily_exp_history' %}">Daily Exp</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_student_fine_entry' %}"> Student Fine Entry </a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_student_waiver_entry' %}"> Student Waiver Entry </a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_student_or_user_close_report' %}"> Close Account list </a></li>
+              
+              </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#"class="nav-link text-white  " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-person-walking  me-2"></i>Entry</a>
+            <ul class="dropdown-menu bg-createcolor">
+                <li><a class="dropdown-item text-white" href="{% url 'company_create_new_account' %}">New Account</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_student_payment_entry' %}">Payment Receive</a></li>
+                <li><a class="dropdown-item text-white" href="{% url 'company_expense_entry' %}">Daily exp entry</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+              </ul>
+        </li>
+
+    </ul>
+ 
+</div>
+
+<div class="col-12 col-md-9 min-vh-100 ">
+  <div class="contents w-full">
+    <nav class="navbar navbar-expand-lg navbar-light bg-black d-md-none d-block">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+        <a href="{% url 'home' %}"class="text-decoration-none d-flex align-items-center">
+          <img src="https://i.postimg.cc/g0Nc5hFy/logo.png"style="height:50px; width:50px"alt="logo"/><span class="fs-4  d-sm-inline text-white">NANOVISION</span>
+      </a>
+    </div>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           
+            <li class="nav-item">
+              <a class="nav-link text-white ">Profile</a>
+            </li>
+          </ul>
+          
+        </div> -->
+        <div class="open-btn"><i class="fa-solid fa-bars text-white ms-2"></i></div>
+
+      </div>
+    </nav>
+  
+  </div>
+    {% block body %}{% endblock  %}
+  </div>
+</div>
+</div>
+<script>
+  $(' .open-btn').on('click',function(){
+    $('.sidebar').addClass('active');
+  })
+
+  $(' .close-btn').on('click',function(){
+    $('.sidebar').removeClass('active');
+  })
+</script>
+</body>
+</html>

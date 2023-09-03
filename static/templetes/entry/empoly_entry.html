@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+<main class="container col-lg-5 mt-5 " >
+  {% if success %}
+    <div class="alert alert-success" role="alert">
+      Successfully Add New user.
+    </div>
+  {% endif %}
+
+<h3>Add Other Users</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+  <form method="POST">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Name in english</label>
+      <input type="text" name="e_ename" class="form-control" id="validationDefault01" placeholder="Full name of course"  required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Name in Bangla</label>
+      <input type="text" name="e_bname" class="form-control" id="validationDefault01" placeholder="Full name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Email</label>
+      <input type="email" name="email" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Date of bath</label>
+      <input type="date" name="date_of_bath" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Father Name</label>
+      <input type="text" name="father_name" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Mother Name</label>
+      <input type="text" name="mother_name" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Present_address</label>
+      <input type="text" name="present_address" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Call Number 1</label>
+      <input type="text" name="call_number1" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Call Number 2</label>
+      <input type="text" name="call_number2" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">User Type</label>
+        <select name="group" class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          {% for group in groups %}
+            <option value="{{group.id}}">{{group.name}}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+    </div>
+
+  </div>
+</div>
+</main>
+
+</body>
+{% endblock  %}

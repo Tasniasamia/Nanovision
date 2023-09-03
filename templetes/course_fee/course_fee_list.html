@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg">
+<h1 style="text-align: center;">{{ request.user.c_name.c_full_name }} ({{ request.user.c_name.c_short_name }})</h1>
+<h3 style="text-align: center;">{{course.course_name}}</h3>
+
+<button type="button" onclick="location.href='{% url 'company_course_new_fee_entry' course.id %}'" class="btn btn-info"> <i class="bi bi-cash-coin"></i> Add new fee</button>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">SL</th>
+      <th scope="col">Fee Entry Date</th>
+      <th scope="col">Max Discount</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Number of Sudent admited</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for free in course.course_feese_set.all %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ free.date|date:"d F Y" }}</td>
+          <td>{{ free.max_discount }} %</td>
+          <td>{{ free.amount }}</td>
+          <td>{{ free.student_user_set.all.count }}</td>
+        </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+</body>
+{% endblock  %}

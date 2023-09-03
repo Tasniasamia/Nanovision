@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg">
+{% if success %}
+<div class="alert alert-success" role="alert">
+  Successfully create new user
+</div>
+{% endif %}
+
+  <script>
+      function subtract_calculation(show_id, a,b)
+      {
+          document.getElementById(show_id).innerText=a-b;
+      }
+  </script>
+
+<div class="container">
+  <div class="col-sm-12 table-responsive mt-3">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" style="background:#131237;color:grey">SL</th>
+          <th scope="col" style="background:#131237;color:grey">ID</th>
+          <th scope="col" style="background:#131237;color:grey">Name</th>
+          <th scope="col" style="background:#131237;color:grey">Phone Number</th>
+          <th scope="col" style="background:#131237;color:grey">Submited Documents</th>
+          <th scope="col" style="background:#131237;color:grey">Course</th>
+          <th scope="col" style="background:#131237;color:grey">Payment type</th>
+          <th scope="col" style="background:#131237;color:grey">Course feese</th>
+          <th scope="col" style="background:#131237;color:grey">Discount</th>
+          <th scope="col" style="background:#131237;color:grey">Actual Fee</th>
+          <th scope="col" style="background:#131237;color:grey">Paid Amount</th>
+          <th scope="col" style="background:#131237;color:grey">Due amount</th>
+          <th scope="col" style="background:#131237;color:grey">Details</th>
+          <th scope="col" style="background:#131237;color:grey">Close</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stu, actual_fee in students.items %}
+          {% if not stu.student_user_close %}
+              <tr>
+                <th scope="row" style="background:#131237;color:grey">{{forloop.counter}}</th>
+                <td style="background:#131237;color:grey">{{stu.student_id}}</td>
+                <td style="background:#131237;color:grey">{{stu.name_english}}</td>
+                <td style="background:#131237;color:grey">{{stu.cell_number_student}}</td>
+                <td style="background:#131237;color:grey"> <a href="{% url 'company_course_student_docment_submition_and_list_view' stu.id %}"> Documents</a> </td>
+                <td style="background:#131237;color:grey">{{stu.course.course_name}}</td>
+                <td style="background:#131237;color:grey">
+                  {% if stu.course.payment_system %}
+                      Fixed
+                  {% else %}
+                      Monthly
+                  {% endif %}
+                </td>
+                <td style="background:#131237;color:grey">{{stu.course_fee.amount}}</td>
+                <td style="background:#131237;color:grey">{{stu.discount}}</td>
+                <td style="background:#131237;color:grey" id="actual_fee{{forloop.counter}}">{{actual_fee}}
+                    <script>
+                     // subtract_calculation("actual_fee{{forloop.counter}}", {{stu.course_fee.amount}}, {{stu.discount}})
+                    </script>
+                </td>
+                <td id="total_amount{{forloop.counter}}" style="background:#131237;color:grey">
+                  <script>
+                      function amount_summation(amount_show_id)
+                        {
+                            let total_amount=0;
+                            '{% for amount in stu.payment_receive_set.all %}'
+                                total_amount +={{amount.amount}}
+                            '{% endfor %}'
+                            document.getElementById(amount_show_id).innerText=total_amount;
+                        }
+                        amount_summation("total_amount{{forloop.counter}}")
+                  </script>
+                </td>
+                <a href="{% url 'company_student_payment_history' stu.id %}"></a>
+                <td id="due{{forloop.counter}}" style="background:#131237;color:grey">
+                  <script>
+                      function due_subtrack(show_id, actual_fee, total_paid){
+                          let actual_feeg=document.getElementById(actual_fee).innerText;
+                          let total_paidg=document.getElementById(total_paid).innerText;
+                          document.getElementById(show_id).innerText=actual_feeg-total_paidg;
+                      }
+                      due_subtrack("due{{forloop.counter}}", "actual_fee{{forloop.counter}}", "total_amount{{forloop.counter}}")
+                  </script>
+
+                <svg xmlns="http://www.w3.org/2000/svg" style="cursor: wait;" width="20" height="20" onclick="location.href='{% url 'company_student_payment_history' stu.id %}'" fill="green" class="bi bi-hourglass-bottom" viewBox="0 0 20 20">
+                  <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z"/>
+                </svg>
+
+                </td>
+
+                <td style="background:#131237;color:grey"><button type="button" onclick="location.href='{% url 'company_student_details_view' stu.id %}'" class="btn btn-outline-secondary">Details</button></td>
+                <td style="background:#131237;color:grey"><button type="button" onclick="location.href='{% url 'company_close_an_account' stu.id %}'" class="btn btn-outline-danger">Close Account</button></td>
+
+              </tr>
+          {% endif %}
+        {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+{% endblock  %}

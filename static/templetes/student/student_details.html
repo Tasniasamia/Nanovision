@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+    <div class="container">
+        <div class="col-sm-12" id="tblCustomers">
+            <table class="table table-borderless" >
+                <thead class="thead">
+                    <tr>
+                        <td>Name In Bangla: </td>
+                        <td>{{student.account.name_bangla}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name In English: </td>
+                        <td>{{student.account.name_english}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nich Name : </td>
+                        <td>{{student.account.nich_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of bath : </td>
+                        <td>{{student.account.date_of_bath}}</td>
+                    </tr>
+                    <tr>
+                        <td>Blood Group : </td>
+                        <td>{{student.account.blood_group}}</td>
+                    </tr>
+                    <tr>
+                        <td>Father's Name : </td>
+                        <td>{{student.account.blood_group}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name : </td>
+                        <td>{{student.account.date_of_bath}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mother Name : </td>
+                        <td>{{student.account.mother_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Father Occupation : </td>
+                        <td>{{student.account.father_occupation}}</td>
+                    </tr>
+                    <tr>
+                        <td>Present Address : </td>
+                        <td>{{student.account.present_address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cell Number : </td>
+                        <td>{{student.account.cell_number_student}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Waivers : </td>
+                        <td>{{student.waivers}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Fines : </td>
+                        <td>{{student.fines}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Paid : </td>
+                        <td>{{student.paid_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Actual Fee : </td>
+                        <td>{{student.actual_fee}}</td>
+                    </tr>
+                    <tr>
+                        <td>Due : </td>
+                        <td>{{student.due}}</td>
+                    </tr>
+                                        <tr>
+                        <td>Document : </td>
+                        <td>
+                            {% for doc in student.account.course_student_documents_submited_set.all %}
+                                    {{doc}}
+                            {% endfor %}
+                        </td>
+                    </tr>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+{% endblock  %}

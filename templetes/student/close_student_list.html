@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg">
+{% if success %}
+<div class="alert alert-success" role="alert">
+  Successfully create new user
+</div>
+{% endif %}
+
+  <script>
+      function subtract_calculation(show_id, a,b)
+      {
+          document.getElementById(show_id).innerText=a-b;
+      }
+  </script>
+
+<div class="container">
+  <div class="col-sm-12 table-responsive mt-2">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th style="background:#131237;color:grey" scope="col">SL</th>
+          <th style="background:#131237;color:grey" scope="col">ID</th>
+          <th style="background:#131237;color:grey" scope="col">Name</th>
+          <th style="background:#131237;color:grey" scope="col">Phone Number</th>
+          <th style="background:#131237;color:grey" scope="col">Course</th>
+          <th style="background:#131237;color:grey" scope="col">Remarks</th>
+          <th style="background:#131237;color:grey" scope="col">Closed Date</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for acc in accounts %}
+              <tr>
+                <th  style="background:#131237;color:grey"scope="row">{{forloop.counter}}</th>
+                <td style="background:#131237;color:grey">{{acc.student.student_id}}</td>
+                <td style="background:#131237;color:grey">{{acc.student.name_english}}</td>
+                <td style="background:#131237;color:grey">{{acc.student.cell_number_student}}</td>
+                <td style="background:#131237;color:grey">{{acc.student.course.course_name}}</td>
+                <td style="background:#131237;color:grey">{{acc.remarks}}</td>
+                <td style="background:#131237;color:grey">{{acc.date.date}}</td>
+ 
+              </tr>
+        {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+{% endblock  %}

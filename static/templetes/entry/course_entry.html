@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block body %}
+<body>
+<main class="container col-lg-5 mt-5 " >
+  {% if success %}
+    <div class="alert alert-success" role="alert">
+      Successfully New cours entry
+    </div>
+  {% endif %}
+
+<h3>Add new courses</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+  <form method="POST">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Course Full Name</label>
+      <input type="text" name="course_full_name" class="form-control" id="validationDefault01" placeholder="Full name of course"  required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Course Short Name</label>
+      <input type="text" name="course_short_name" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Course code</label>
+      <input type="text" name="course_code" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Number of classes</label>
+      <input type="number" name="number_of_classes" class="form-control" id="validationDefault02" placeholder="Short Name of course"  required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Payment system</label>
+      <input type="checkbox" name="payment_system" id="validationDefault02"  required>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+    </div>
+
+  </div>
+</div>
+</main>
+
+</body>
+{% endblock  %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+<main class="container col-lg-5 mt-5 " >
+    {% if success %}
+    <div class="alert alert-success" role="alert">
+      Successfully Add a new Help desk number
+    </div>
+  {% endif %}
+<h1>{{ fee.course.course_name }}</h1>
+<h3>Assing New Course Fee</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+  <form method="POST">
+    {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Amount</label>
+      <input type="number" name="amount" class="form-control" id="validationDefault01" placeholder="Amount"  required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Max Discount %</label>
+      <input type="number" name="max_discount" class="form-control" id="validationDefault02" placeholder="Max Discount"  required>
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+    </div>
+
+  </div>
+</div>
+</main>
+
+</body>
+{% endblock  %}

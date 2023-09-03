@@ -1,0 +1,203 @@
+
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+{% block head %}
+ <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!--  <script src="{% static 'js/jquery.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+<!--  <script src="{% static 'js/jquery.min.2.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+
+<title>{{cn.c_short_name}}</title>
+{% endblock  %}
+</head>
+
+
+<body>
+{% if success %}
+<div class="alert alert-success" role="alert">
+  Successfully create new user
+</div>
+{% endif %}
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Personal Info</h5>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" required id="firstName" name="name_in_englis" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Name in English</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="name_in_bangla" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Name in Bangla</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" name="nich_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Nich Name</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="date" id="lastName" required name="date_of_bath" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Date of bath</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" name="blood_group" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Blood Group</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" required name="father_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Father name</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="mother_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Mother Name</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="father_occupation" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Father Occupation</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="present_address" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Present Address</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="cell_number_student" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Cell Number Student</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="cell_number_guardian" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Cell Number Guardian</label>
+                  </div>
+                </div>
+
+                <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Admission Info</h5>
+
+
+                <div class="col-md-6 mb-4">
+                  <select name="course" class="select form-control">
+<!--                    <option value="1" disabled>Choose Chorse</option>-->
+                    {% for course in company.course_set.all %}
+                      <option value="{{course.id}}">{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+                  <select name="batch" class="select form-control">
+<!--                    <option value="1" disabled>Choose Chorse</option>-->
+                    {% for batch in company.course_batch_set.all %}
+                    <option value="{{batch.id}}">{{batch.batch}}</option>
+                    {% endfor %}
+                  </select>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <select name="stime" class="select form-control">
+                    {% for ti in company.course_time_set.all %}
+                        <option value="{{ti.id}}">{{ti.s_time}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+
+
+
+
+              <!-- <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="number" name="discount" placeholder="Discount Number" class="form-control form-control-lg" id="birthdayDate" />
+                    <label for="birthdayDate"  class="form-label">Discount</label>
+                  </div>
+
+                </div> -->
+
+              <div class="mt-4 pt-2">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

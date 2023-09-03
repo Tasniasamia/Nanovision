@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+{% if success %}
+<div class="alert alert-success" role="alert">
+  Successfully create new user
+</div>
+{% endif %}
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Personal Info</h5>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" required id="firstName" name="name_in_englis" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Name in English</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="name_in_bangla" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Name in Bangla</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" name="nich_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Nich Name</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="date" id="lastName" required name="date_of_bath" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Date of bath</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" name="blood_group" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Blood Group</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" required name="father_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Father name</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="mother_name" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Mother Name</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="father_occupation" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Father Occupation</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="present_address" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Present Address</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="firstName" required name="cell_number_student" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">Cell Number Student</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" id="lastName" name="cell_number_guardian" class="form-control form-control-lg" />
+                    <label class="form-label" for="lastName">Cell Number Guardian</label>
+                  </div>
+                </div>
+
+                <h5 class="mb-4 pb-2 pb-md-0 mb-md-5">Admission Info</h5>
+
+
+                <div class="col-md-6 mb-4">
+                  <select name="course" class="select form-control">
+<!--                    <option value="1" disabled>Choose Chorse</option>-->
+                    {% for course in request.user.c_name.course_set.all %}
+                      <option value="{{course.id}}">{{ course.course_name }}</option>
+                    {% endfor %}
+                  </select>
+
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+                  <select name="batch" class="select form-control">
+<!--                    <option value="1" disabled>Choose Chorse</option>-->
+                    {% for batch in request.user.c_name.course_batch_set.all %}
+                    <option value="{{batch.id}}">{{batch.batch}}</option>
+                    {% endfor %}
+                  </select>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <select name="stime" class="select form-control">
+                    {% for ti in request.user.c_name.course_time_set.all %}
+                        <option value="{{ti.id}}">{{ti.s_time}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+
+
+
+
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="number" name="discount" placeholder="Discount Number" class="form-control form-control-lg" id="birthdayDate" />
+                    <label for="birthdayDate"  class="form-label">Discount</label>
+                  </div>
+
+                </div>
+
+              <div class="mt-4 pt-2">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+{% endblock  %}

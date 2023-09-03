@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+{% if success %}
+<div class="alert alert-success" role="alert">
+  Successfully create new user
+</div>
+{% endif %}
+
+  <script>
+      function subtract_calculation(show_id, a,b)
+      {
+          document.getElementById(show_id).innerText=a-b;
+      }
+  </script>
+
+<div class="container">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">SL</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Course</th>
+          <th scope="col">Remarks</th>
+          <th scope="col">Closed Date</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for acc in accounts %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{acc.student.student_id}}</td>
+                <td>{{acc.student.name_english}}</td>
+                <td>{{acc.student.cell_number_student}}</td>
+                <td>{{acc.student.course.course_name}}</td>
+                <td>{{acc.remarks}}</td>
+                <td>{{acc.date.date}}</td>
+ 
+              </tr>
+        {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+{% endblock  %}

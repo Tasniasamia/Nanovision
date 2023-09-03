@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+
+ <main class="container col-lg-5 mt-5">
+<h1 class="h2 mt-3 mb-3 fcolor" align="center" >{{request.user.c_name.c_full_name}}</h1>
+<h3 class="h2 mt-3 mb-3 fcolor" align="center" >{{course.course_name}} Documents </h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">SL</th>
+      <th scope="col">Document Name</th>
+      <th scope="col">Status</th>
+<!--      <th scope="col">Left Document</th>-->
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+<!--  <necessary document -->
+    {% for nd in course.course_necessary_document_set.all %}
+        <tr>
+          <td scope="row">{{forloop.counter}}</td>
+          <td>{{nd.document_name}}</td>
+          <td>
+              {% if nd.mandatory %}
+                Mandatory
+              {% else %}
+                Normal
+              {% endif %}
+          </td>
+          <td><button onclick="location.href='{% url 'company_course_exist_document_edit' nd.id %}'" class="btn btn-danger">Edit</button></td>
+          <td><button onclick="location.href='{% url 'company_course_exist_document_delete' nd.id %}'" class="btn btn-danger">Delete</button></td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+    <form method="POST" >
+    {% csrf_token %}
+      <h1 class="h2 mt-3 mb-3 fcolor" align="center">Entry New Document</h1>
+      <div class="mb-3 fcolor">
+        <label for="exampleInputEmail1" class="form-label">Document name</label>
+        <input required name="document_name" type="text" class="form-control" placeholder="Document Name" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+        <div class="mb-3 fcolor">
+        <label for="exampleInputEmail1" class="form-label">Mandatory</label>
+        <input name="mandatory" type="checkbox" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <button class="w-100 btn btn-lg btn-info" type="submit" style="background:#066706; color:#fff;">Save</button>
+    </form>
+  </main>
+
+</body>
+{% endblock  %}

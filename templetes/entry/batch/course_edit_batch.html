@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg">
+
+ <main class="container col-lg-5 mt-5">
+<h1 class="h2 mt-3 mb-3 fcolor" align="center" >{{request.user.c_name.c_full_name}}</h1>
+<h3 class="h2 mt-3 mb-3 fcolor" align="center" >{{course.course_name}} Times </h3>
+<!--<table class="table table-hover">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">SL</th>-->
+<!--      <th scope="col">Start Time</th>-->
+<!--      <th scope="col">Ending Time</th>-->
+<!--      <th scope="col">Edit</th>-->
+<!--      <th scope="col">Delete</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    {% for tl in course.course_time_set.all %}-->
+<!--        <tr>-->
+<!--          <td scope="row">{{forloop.counter}}</td>-->
+<!--          <td>{{tl.s_time}}</td>-->
+<!--          <td>{{tl.e_time}}</td>-->
+<!--          <td>Edit</td>-->
+<!--          <td><button onclick="location.href='{% url 'compay_course_exist_time_delete' tl.id %}'" class="btn btn-danger">Delete</button></td>-->
+<!--        </tr>-->
+<!--    {% endfor %}-->
+<!--  </tbody>-->
+<!--</table>-->
+
+
+    <form method="POST" >
+    {% csrf_token %}
+      <h1 class="h2 mt-3 mb-3 fcolor" align="center" style="color:green;">Entry New Time</h1>
+      <div class="mb-3 fcolor">
+        <label for="exampleInputEmail1" class="form-label">Batch Name</label>
+        <input required name="batch" type="text" value="{{batch.batch}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+
+
+      <button class="w-100 btn btn-lg btn-info" type="submit" style="background:#066706; color:#fff;">Save</button>
+    </form>
+  </main>
+
+</body>
+{% endblock  %}

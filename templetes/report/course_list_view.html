@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg ">
+<h1 style="text-align: center;"class="text-white mt-5 mb-5">{{ request.user.c_name.c_full_name }} ({{ request.user.c_name.c_short_name }})</h1>
+<div class="col-sm-12 table-responsive ">
+  <table class="table ">
+    <thead class="thead-dark">
+
+    <tr>
+      <th scope="col" style="background:#131237;color:grey">SL</th>
+      <th scope="col" style="background:#131237;color:grey">Course Name</th>
+      <th scope="col" style="background:#131237;color:grey">Short name</th>
+      <th scope="col" style="background:#131237;color:grey">Number of classes</th>
+      <th scope="col" style="background:#131237;color:grey">Payment system</th>
+      <th scope="col" style="background:#131237;color:grey">Number of students</th>
+      <th scope="col" style="background:#131237;color:grey">Currently cours fee</th>
+      <th scope="col" style="background:#131237;color:grey">Documents</th>
+      <th scope="col" style="background:#131237;color:grey">Batchs</th>
+      <th scope="col" style="background:#131237;color:grey">Times</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in courses %}
+      <tr>
+        <th scope="row" style="background:#131237;color:grey">{{forloop.counter}}</th>
+        <td style="background:#131237;color:grey">{{ course.course_name }}</td>
+        <td style="background:#131237;color:grey">{{ course.short_name }}</td>
+        <td style="background:#131237;color:grey">{{ course.number_of_class }}</td>
+        <td style="background:#131237;color:grey">{% if course.payment_system %}
+                Fix
+            {% else %}
+                Monthly
+            {% endif %}
+        </td>
+        <td style="background:#131237;color:grey"> <a href="#"> {{course.student_user_set.all.count}} </a></td>
+        <td style="background:#131237;color:grey"><a href="{% url 'company_course_fee_list_view' course.id %}">{{course.course_feese_set.last.amount}}</a></td>
+        <td style="background:#131237;color:grey"><button onclick="location.href='{% url 'company_course_new_document_entry' course.id %}'" type="button" class="btn btn-secondary"style="background-image:linear-gradient(
+          92.23deg,
+          #ff56f6 21.43%,
+          #b936ee 50.63%,
+          #3bace2 100%,
+          #406aff 117.04%
+        );">Documents</button></td>
+        <td style="background:#131237;color:grey"><button onclick="location.href='{% url 'company_course_new_batch_entry' course.id %}'" type="button" class="btn btn-secondary"style="background-image:linear-gradient(
+          92.23deg,
+          #ff56f6 21.43%,
+          #b936ee 50.63%,
+          #3bace2 100%,
+          #406aff 117.04%
+        );">Batchs</button></td>
+        <td style="background:#131237;color:grey"><button onclick="location.href='{% url 'company_course_new_time_entry' course.id %}'" type="button" class="btn btn-secondary"style="background-image:linear-gradient(
+          92.23deg,
+          #ff56f6 21.43%,
+          #b936ee 50.63%,
+          #3bace2 100%,
+          #406aff 117.04%
+        );">Times</button></td>
+      </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</body>
+{% endblock  %}

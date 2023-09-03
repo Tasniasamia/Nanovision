@@ -1,0 +1,95 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+
+<div class="container">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">SL</th>
+          <th scope="col">Payment ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Course</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for payment in payments %}
+          <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td>{{payment.payment_id}}</td>
+            <td>{{payment.student.name_english}}</td>
+            <td>{{payment.student.course.course_name}}</td>
+            <td>{{payment.date}}</td>
+            <td class="camounts">{{payment.amount}}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Total Paid</td>
+          <td id="show_total">
+            <script>
+              let amounts = document.querySelectorAll(".camounts");
+              let total=0;
+              for (let i = 0; i < amounts.length; i++){
+                  total+=Number(amounts[i].innerText)
+              }
+              document.getElementById('show_total').innerText = total;
+            </script>
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Course Fee</td>
+          <td id="show_course_fee">
+            <script>
+              let course_fee= {{student.course_fee.amount}};
+              let discount= {{student.discount}};
+              document.getElementById('show_course_fee').innerText = course_fee-discount;
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Due Amount</td>
+          <td id="show_due">
+            <script>
+                let total_paid=document.getElementById('show_total');
+                let course_fees=document.getElementById('show_course_fee');
+                let due=course_fees.innerText-total_paid.innerText;
+                document.getElementById('show_due').innerText = due;
+            </script>
+          </td>
+        </tr>
+
+
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+{% endblock  %}
+
+</html>

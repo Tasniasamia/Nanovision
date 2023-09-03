@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/grunge-watercolor-background-using-pastel-colours_1048-6530.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:100vh;
+  
+  }
+</style>
+<body class="body_bg">
+{% if successfull %}
+<div class="alert alert-success" role="alert">
+  {{successfull}}
+</div>
+{% endif %}
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="container">
+    <div class="col-sm-12">
+      <table  class="table table-striped">
+        <thead class="thead-dark table-secondary">
+          <tr>
+            <th style="background:#131237;color:grey" scope="col text-center">SL</th>
+            <th style="background:#131237;color:grey" scope="col text-center">Choose exp catagory</th>
+            <th style="background:#131237;color:grey" scope="col text-center">Title</th>
+            <th style="background:#131237;color:grey" scope="col text-center">Details</th>
+            <th style="background:#131237;color:grey" scope="col text-center">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in ra %}
+            <tr>
+              <th scope="row" style="background:#131237;color:grey">{{forloop.counter}}</th>
+              <td style="background:#131237;color:grey">
+
+                <select name="exp_catagory{{forloop.counter}}" class="form-control" style="background:#131237;color:grey">
+                  <option value="None" >Select Exp Cata</option>
+                  {% for ec in exp_cat %}
+                      <option value="{{ec.id}}" >{{ec.exp_name}}</option>
+                  {% endfor %}
+                </select>
+
+              </td>
+              <td style="background:#131237;color:grey"><input name="title{{forloop.counter}}" type="text" class="form-control"></input></td>
+              <td style="background:#131237;color:grey"><input name="details{{forloop.counter}}" type="text" class="form-control"></input></td>
+              <td style="background:#131237;color:grey"><input name="amount{{forloop.counter}}" type="number" class="form-control"></input></td>
+            </tr>
+          {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary">Save</button>
+
+    </div>
+  </div>
+</form>
+</body>
+{% endblock  %}

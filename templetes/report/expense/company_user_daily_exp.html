@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+
+
+<body class="body_bg">
+
+
+
+
+<div class="container-fluid mt-2 ">
+  <div class="col-sm-12">
+    <nav class="navbar navbar-expand-lg navbar-light w-full mb-2" style="background-color: rgba(0,0,0,0.3);">
+      <div class="container-fluid w-full">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"style="border:0;box-shadow:none" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <span class="navbar-toggler-icon text-white"></span> -->
+
+          <i class="fa-solid fa-bars text-white "></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </ul>
+          <form method="POST" class="d-flex flex-column flex-md-row gap-2 gap-md-2 w-full ">
+              {% csrf_token %}
+              <select name='exp_catagory' class="form-select select"style="background:#131237;color:grey" aria-label="Default select example">
+                  <option value="All"style="background:#131237;color:grey">All</option>
+                  {% for exp in request.user.c_name.company_expense_catagory_set.all %}
+                      <option value="{{exp.id}}"style="background:#131237;color:grey">{{exp.exp_name}}</option>
+                  {% endfor %}
+              </select>
+  
+              <input name="fdate", type="date", class="form-control "style="background:#131237;color:grey">
+              <input name="tdate", type="date", class="form-control "style="background:#131237;color:grey">
+  
+              <button class="btn text-white"style="background-image:linear-gradient(
+                92.23deg,
+                #ff56f6 21.43%,
+                #b936ee 50.63%,
+                #3bace2 100%,
+                #406aff 117.04%
+              );" type="submit">Search</button>
+          </form>
+          </div>
+      </div>
+      </nav>
+      <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" style="background:#131237;color:grey">SL</th>
+          <th scope="col" style="background:#131237;color:grey">EXP ID</th>
+          <th scope="col" style="background:#131237;color:grey">Catagory</th>
+          <th scope="col" style="background:#131237;color:grey">Date</th>
+          <th scope="col" style="background:#131237;color:grey">Title</th>
+          <th scope="col" style="background:#131237;color:grey">Details</th>
+          <th scope="col" style="background:#131237;color:grey">Amount</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for histori in historis %}
+          <tr>
+            <td scope="row" style="background:#131237;color:grey">{{forloop.counter}}</td>
+            <td  style="background:#131237;color:grey">{{histori.exp_id}}</td>
+            <td  style="background:#131237;color:grey">{{histori.catagory.exp_name}}</td>
+            <td  style="background:#131237;color:grey">{{histori.date.date}}</td>
+            <td  style="background:#131237;color:grey">{{histori.title}}</td>
+            <td  style="background:#131237;color:grey">{{histori.details}}</td>
+
+            <td class="camounts" style="background:#131237;color:grey">{{histori.amount}}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td  style="background:#131237;color:grey"></td>
+          <td  style="background:#131237;color:grey"></td>
+          <td  style="background:#131237;color:grey"></td>
+          <td  style="background:#131237;color:grey"></td>
+          <td  style="background:#131237;color:grey"></td>
+          <td  style="background:#131237;color:grey">Total</td>
+          <td  style="background:#131237;color:grey" id="show_total">
+            <script>
+              let amounts = document.querySelectorAll(".camounts");
+              let total=0;
+              for (let i = 0; i < amounts.length; i++){
+                  total+=Number(amounts[i].innerText)
+              }
+              document.getElementById('show_total').innerText = total;
+            </script>
+          </td>
+        </tr>
+
+<!--        <tr>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td>Course Fee</td>-->
+<!--          <td id="show_course_fee">-->
+<!--            <script>-->
+<!--              let course_fee= {{student.course_fee.amount}};-->
+<!--              let discount= {{student.discount}};-->
+<!--              document.getElementById('show_course_fee').innerText = course_fee-discount;-->
+<!--            </script>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td>Due Amount</td>-->
+<!--          <td id="show_due">-->
+<!--            <script>-->
+<!--                let total_paid=document.getElementById('show_total');-->
+<!--                let course_fees=document.getElementById('show_course_fee');-->
+<!--                let due=course_fees.innerText-total_paid.innerText;-->
+<!--                document.getElementById('show_due').innerText = due;-->
+<!--            </script>-->
+<!--          </td>-->
+<!--        </tr>-->
+
+
+  </tbody>
+</table></div>
+  </div>
+</div>
+</body>
+{% endblock  %}
+
+</html>

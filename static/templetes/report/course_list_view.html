@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block body %}
+<body>
+<h1 style="text-align: center;">{{ request.user.c_name.c_full_name }} ({{ request.user.c_name.c_short_name }})</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">SL</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Short name</th>
+      <th scope="col">Number of classes</th>
+      <th scope="col">Payment system</th>
+      <th scope="col">Number of students</th>
+      <th scope="col">Currently cours fee</th>
+      <th scope="col">Documents</th>
+      <th scope="col">Batchs</th>
+      <th scope="col">Times</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in courses %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{ course.course_name }}</td>
+        <td>{{ course.short_name }}</td>
+        <td>{{ course.number_of_class }}</td>
+        <td>{% if course.payment_system %}
+                Fix
+            {% else %}
+                Monthly
+            {% endif %}
+        </td>
+        <td> <a href="#"> {{course.student_user_set.all.count}} </a></td>
+        <td><a href="{% url 'company_course_fee_list_view' course.id %}">{{course.course_feese_set.last.amount}}</a></td>
+        <td><button onclick="location.href='{% url 'company_course_new_document_entry' course.id %}'" type="button" class="btn btn-secondary">Documents</button></td>
+        <td><button onclick="location.href='{% url 'company_course_new_batch_entry' course.id %}'" type="button" class="btn btn-secondary">Batchs</button></td>
+        <td><button onclick="location.href='{% url 'company_course_new_time_entry' course.id %}'" type="button" class="btn btn-secondary">Times</button></td>
+      </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+{% endblock  %}

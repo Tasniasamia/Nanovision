@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+{% if successfull %}
+<div class="alert alert-success" role="alert">
+  {{successfull}}
+</div>
+{% endif %}
+
+<form method="POST">
+  {% csrf_token %}
+  <div class="container">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">SL</th>
+            <th scope="col">Choose exp catagory</th>
+            <th scope="col">Title</th>
+            <th scope="col">Details</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in ra %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>
+
+                <select name="exp_catagory{{forloop.counter}}" class="form-control">
+                  <option value="None" >Select Exp Cata</option>
+                  {% for ec in exp_cat %}
+                      <option value="{{ec.id}}" >{{ec.exp_name}}</option>
+                  {% endfor %}
+                </select>
+
+              </td>
+              <td><input name="title{{forloop.counter}}" type="text" class="form-control"></input></td>
+              <td><input name="details{{forloop.counter}}" type="text" class="form-control"></input></td>
+              <td><input name="amount{{forloop.counter}}" type="number" class="form-control"></input></td>
+            </tr>
+          {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary">Save</button>
+
+    </div>
+  </div>
+</form>
+</body>
+{% endblock  %}

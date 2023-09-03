@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .body_bg{
+    background-image: url('https://img.freepik.com/free-vector/elegant-gradient-violet-wavy-net-background_23-2148402778.jpg?size=626&ext=jpg&ga=GA1.2.103588016.1689540008&semt=ais');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 100vh; */
+  }
+  .btn:hover{
+    background-image:linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  )!important;
+  }
+  input::placeholder{
+    color:grey!important;
+  }
+</style>
+<body class="body_bg">
+
+ <main class="container col-lg-5 mt-5">
+<h1 class="h2 mt-3 mb-3 fcolor" align="center" >{{student.name_english}} ({{student.student_id}})</h1>
+<h3 class="h2 mt-3 mb-3 fcolor" align="center" >{{student.course.course_name}} Documents </h3>
+    <form method="POST">
+        {% csrf_token %}
+     <table class="table table-hover">
+
+          <thead>
+            <tr>
+              <th scope="col">SL</th>
+              <th scope="col">Document Name</th>
+              <th scope="col">Status</th>
+        <!--      <th scope="col">Left Document</th>-->
+            </tr>
+          </thead>
+          <tbody>
+        <!--  <necessary document -->
+            {% for nd in student.course.course_necessary_document_set.all %}
+                <tr>
+                  <td scope="row">{{forloop.counter}}</td>
+                  <td>{{nd.document_name}}</td>
+                  <td>
+                      {% if nd.id in submited_docs %}
+                        <input type="checkbox" name="doc{{forloop.counter}}" checked readonly >
+                      {% else %}
+                        <input type="checkbox" name="doc{{forloop.counter}}" >
+                      {% endif %}
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <button class="w-100 btn btn-lg btn-info" type="submit" style="background:#066706; color:#fff;">Save</button>
+    </form>
+
+
+<!--    <form method="POST" >-->
+<!--    {% csrf_token %}-->
+<!--      <h1 class="h2 mt-3 mb-3 fcolor" align="center">Entry New Document</h1>-->
+<!--      <div class="mb-3 fcolor">-->
+<!--        <label for="exampleInputEmail1" class="form-label">Document name</label>-->
+<!--        <input required name="document_name" type="text" class="form-control" placeholder="Document Name" id="exampleInputEmail1" aria-describedby="emailHelp">-->
+<!--      </div>-->
+<!--        <div class="mb-3 fcolor">-->
+<!--        <label for="exampleInputEmail1" class="form-label">Mandatory</label>-->
+<!--        <input name="mandatory" type="checkbox" id="exampleInputEmail1" aria-describedby="emailHelp">-->
+<!--      </div>-->
+<!--      <button class="w-100 btn btn-lg btn-info" type="submit" style="background:#066706; color:#fff;">Save</button>-->
+<!--    </form>-->
+  </main>
+
+</body>
+{% endblock  %}

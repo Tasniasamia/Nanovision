@@ -1,0 +1,79 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+{% block head %}
+ <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!--  <script src="{% static 'js/jquery.min.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+<!--  <script src="{% static 'js/jquery.min.2.js' %}" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+
+<title>{{cn.c_short_name}}</title>
+{% endblock  %}
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"><img class="rounded-circle" src="{{cn.logo.url}}" alt="Logo" ></a>
+<!--      <img src="{{cn.logo.url}}" alt="Logo" >-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--        Here i have to add company icon one click to go to home page-->
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'company_course_entry' %}">Course Entry</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_help_desk_number_entry' %}">Help desk number</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_empolys_user_entry' %}">User entry</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_expence_catagory_entry' %}">Expencse Catagory Entry</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'company_course_list_view' %}">Course List</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_student_or_user_report' %}">Account List</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_daily_income_history' %}">Daily Income</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_daily_exp_history' %}">Daily Exp</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_student_fine_entry' %}"> Student Fine Entry </a></li>
+            <li><a class="dropdown-item" href="{% url 'company_student_waiver_entry' %}"> Student Waiver Entry </a></li>
+            <li><a class="dropdown-item" href="{% url 'company_student_or_user_close_report' %}"> Close Account list </a></li>
+          
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Entry
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'company_create_new_account' %}">New Account</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_student_payment_entry' %}">Payment Receive</a></li>
+            <li><a class="dropdown-item" href="{% url 'company_expense_entry' %}">Daily exp entry</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+<!--      <form class="d-flex" role="search">-->
+<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--      </form>-->
+    </div>
+  </div>
+</nav>
+    {% block body %}{% endblock  %}
+</body>
+</html>

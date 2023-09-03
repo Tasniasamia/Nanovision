@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+        <form method="POST" class="d-flex">
+            {% csrf_token %}
+            <select name='courses' class="form-select select" aria-label="Default select example">
+                <option value="All">All</option>
+                {% for course in courses %}
+                    <option value="{{course.id}}">{{course.short_name}}</option>
+                {% endfor %}
+            </select>
+
+            <input name="fdate", type="date", class="form-control">
+            <input name="tdate", type="date", class="form-control">
+
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        </div>
+    </div>
+    </nav>
+
+
+
+<body>
+
+
+
+
+<div class="container">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">SL</th>
+          <th scope="col">Payment ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Course</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for histori in historis %}
+          <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td>{{histori.payment_id}}</td>
+            <td>{{histori.student.name_english}}</td>
+            <td>{{histori.student.course.course_name}}</td>
+            <td>{{histori.date}}</td>
+            <td class="camounts">{{histori.amount}}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Total</td>
+          <td id="show_total">
+            <script>
+              let amounts = document.querySelectorAll(".camounts");
+              let total=0;
+              for (let i = 0; i < amounts.length; i++){
+                  total+=Number(amounts[i].innerText)
+              }
+              document.getElementById('show_total').innerText = total;
+            </script>
+          </td>
+        </tr>
+
+<!--        <tr>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td>Course Fee</td>-->
+<!--          <td id="show_course_fee">-->
+<!--            <script>-->
+<!--              let course_fee= {{student.course_fee.amount}};-->
+<!--              let discount= {{student.discount}};-->
+<!--              document.getElementById('show_course_fee').innerText = course_fee-discount;-->
+<!--            </script>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td>Due Amount</td>-->
+<!--          <td id="show_due">-->
+<!--            <script>-->
+<!--                let total_paid=document.getElementById('show_total');-->
+<!--                let course_fees=document.getElementById('show_course_fee');-->
+<!--                let due=course_fees.innerText-total_paid.innerText;-->
+<!--                document.getElementById('show_due').innerText = due;-->
+<!--            </script>-->
+<!--          </td>-->
+<!--        </tr>-->
+
+
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+{% endblock  %}
+
+</html>

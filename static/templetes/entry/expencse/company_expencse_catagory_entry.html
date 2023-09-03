@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<body>
+
+ <main class="container col-lg-5 mt-5">
+<h1 class="h2 mt-3 mb-3 fcolor" align="center" >{{request.user.c_name.c_full_name}}</h1>
+<h3 class="h2 mt-3 mb-3 fcolor" align="center" >Expences new catagory entry </h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">SL</th>
+      <th scope="col">Catagory name</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cec in request.user.c_name.company_expense_catagory_set.all %}
+        <tr>
+          <td scope="row">{{forloop.counter}}</td>
+          <td>{{cec.exp_name}}</td>
+          <td><button onclick="location.href='{% url 'company_expences_catagory_delete' cec.id %}'" class="btn btn-danger">Delete</button></td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+    <form method="POST" >
+    {% csrf_token %}
+      <h1 class="h2 mt-3 mb-3 fcolor" align="center">Entry exp catagory</h1>
+      <div class="mb-3 fcolor">
+        <label for="exampleInputEmail1" class="form-label">Batch</label>
+        <input required name="exp_name" type="text" class="form-control" placeholder="EXP" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <button class="w-100 btn btn-lg btn-info" type="submit" style="background:#066706; color:#fff;">Save</button>
+    </form>
+  </main>
+
+</body>
+{% endblock  %}
